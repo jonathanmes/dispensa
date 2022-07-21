@@ -1,22 +1,24 @@
-class Produto:
-   def __init__(self, codigo_ean, produto, id_marca, id_unidade, qtd_unidade):
-      self.codigo_ean = codigo_ean
-      self.produto = produto
-      self.id_marca = id_marca
-      self.id_unidade = id_unidade
-      self.qtd_unidade = qtd_unidade
+import mysql.connector
 
-   def CriarProduto(self):
-      pass
+banco = mysql.connector.connect(
+   host = 'localhost',
+   user='root',
+   passwd='',
+   database='dispensa'
+)
+def CriaProduto():
+   codigo_ean = input('Código EAN: ')
+   produto = input('Nome do Produto: ')
+   id_marca = input('Marca: ')
+   id_unidade = input('Unidade: ')
+   qtd = input('Quantidade Mínima: ')
+   cursor = banco.cursor()
+   add = ("INSERT INTO PRODUTO(CODIGO_EAN, PRODUTO, ID_MARCA, ID_UNIDADE, QTD) VALUES ('{}','{}','{}','{}','{}')".format(codigo_ean,produto,id_marca,id_unidade,qtd))
+     
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()
+   
 
-   def AlterarProduto(self):
-      pass
-
-   def ExcluirProduto(self):
-      pass
-
-   def VerProduto(self):
-      print(f"EAN: {self.codigo_ean} - Produto: {self.produto}")
-
-computador = Produto('123','Papel','12313','12321','122')
-computador.VerProduto()
+##CriaProduto()
