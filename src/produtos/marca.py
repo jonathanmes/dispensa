@@ -24,3 +24,17 @@ def VerMarca():
 
     for x in result:
         print(x)
+
+def EditarMarca():
+   VerMarca()
+   pass
+
+def ExcluirMarca():
+   VerMarca()
+   cursor = banco.cursor()
+   id = input("ID: ")
+   add = ("DELETE FROM MARCA WHERE ID_MARCA = '{}'".format(id))
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()

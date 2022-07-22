@@ -23,3 +23,17 @@ def VerUnidade():
 
     for x in result:
         print(x)
+
+def EditarUnidade():
+   VerUnidade()
+   pass
+
+def ExcluirUnidade():
+   VerUnidade()
+   cursor = banco.cursor()
+   id = input("ID: ")
+   add = ("DELETE FROM UNIDADE WHERE ID_UNIDADE = '{}'".format(id))
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()

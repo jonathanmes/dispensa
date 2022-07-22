@@ -41,3 +41,18 @@ def AdicionarUnidade():
    unidade.VerUnidade()
    id = input("ID Unidade: ")
    return id
+
+def EditarProduto():
+   VerProduto()
+   pass
+
+def ExcluirProduto():
+   VerProduto()
+   cursor = banco.cursor()
+   ean = input("Código EAN: ")
+   add = ("DELETE FROM PRODUTO WHERE CODIGO_EAN = '{}'".format(ean))
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()
+ 
