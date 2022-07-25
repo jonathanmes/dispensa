@@ -2,6 +2,7 @@ from ast import main
 from zlib import DEF_BUF_SIZE
 import mysql.connector
 import produtos.unidade as unidade
+import produtos.marca as  marca
 
 
 banco = mysql.connector.connect(
@@ -15,7 +16,7 @@ def CriaProduto():
    produto = input('Nome do Produto: ')
    id_marca = int(AdicionarMarca())
    id_unidade = int(AdicionarUnidade())
-   qtd = input('Quantidade Mínima: ')
+   qtd = input('Quantidade: ')
    cursor = banco.cursor()
    add = ("INSERT INTO PRODUTO(CODIGO_EAN, PRODUTO, ID_MARCA, ID_UNIDADE, QTD_UNIDADE) VALUES ('{}','{}','{}','{}','{}')".format(codigo_ean,produto,id_marca,id_unidade,qtd))
      
@@ -33,7 +34,7 @@ def VerProduto():
       print(x)
 
 def AdicionarMarca():
-   VerProduto()
+   marca.VerMarca()
    id = input('ID Marca: ')
    return id
 
@@ -44,7 +45,15 @@ def AdicionarUnidade():
 
 def EditarProduto():
    VerProduto()
-   pass
+   cursor = banco.cursor()
+   ean = input("Código EAN: ")
+   produto = input("Nome do Produto: ")
+   add = ("update PRODUTO set PRODUTO = '{}' where CODIGO_EAN = '{}'".format(produto,ean))
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()
+
 
 def ExcluirProduto():
    VerProduto()
@@ -55,4 +64,6 @@ def ExcluirProduto():
    banco.commit()
    cursor.close()
    banco.close()
+
+
  
