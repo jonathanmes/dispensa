@@ -27,7 +27,15 @@ def VerMarca():
 
 def EditarMarca():
    VerMarca()
-   pass
+   cursor = banco.cursor()
+   id = input("ID: ")
+   marca = input("Marca: ")
+   add = ("update MARCA set MARCA = '{}' where ID_MARCA = '{}'".format(marca,id))
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()
+
 
 def ExcluirMarca():
    VerMarca()

@@ -26,7 +26,15 @@ def VerUnidade():
 
 def EditarUnidade():
    VerUnidade()
-   pass
+   cursor = banco.cursor()
+   id = input("ID: ")
+   unidade = input("Unidade: ")
+   add = ("update UNIDADE set UNIDADE = '{}' where ID_UNIDADE = '{}'".format(unidade,id))
+   cursor.execute(add)
+   banco.commit()
+   cursor.close()
+   banco.close()
+
 
 def ExcluirUnidade():
    VerUnidade()
@@ -37,3 +45,4 @@ def ExcluirUnidade():
    banco.commit()
    cursor.close()
    banco.close()
+
